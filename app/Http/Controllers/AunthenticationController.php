@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -11,7 +10,6 @@ class AunthenticationController extends Controller
 {
     public function authenticate(Request $request){
         // Applying validation
-
         $validator = Validator::make($request->all(),[
             'email'=>'required|email',
             'password' =>'required',
@@ -34,6 +32,7 @@ class AunthenticationController extends Controller
                     $user = User::find(Auth::user()->id);
                   
                     // get token
+                    // $token = $user->createToken('token');   
                     $token = $user->createToken('token')->plainTextToken;    
 
                     // return Auth::user();
@@ -48,6 +47,7 @@ class AunthenticationController extends Controller
                     return response()->json([
                         'status'=>false,
                         'message'=>'Either email or password is incorrect'
+                        //    'message'=>'Either email or password is incorrect'
                     ]);   
                 }
         }
