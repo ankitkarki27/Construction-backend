@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -43,7 +44,8 @@ class ServiceController extends Controller
         $model=new Service();
         $model->title = $request-> title;
         $model->short_desc = $request-> short_desc;
-        $model->slug = $request-> slug;
+
+        $model->slug = Str::slug($request->slug);
         $model->content = $request-> content;
         $model->status = $request-> status; 
        $model->save();
