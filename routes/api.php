@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AunthenticationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,5 +17,8 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
 Route::get('dashboard',[DashboardController::class,'index']);
 // logouts
 Route::get('logout',[AunthenticationController::class,'logout']);
+
+// Service routes
+Route::post('services',[ServiceController::class,'store']);
 
 });
