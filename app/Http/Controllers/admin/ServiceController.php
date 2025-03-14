@@ -11,19 +11,17 @@ use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $services= Service::orderBy('created_at','DESC')->get();
+        return response()->json([
+            'status'=>true,
+            'data'=>$services
+        ]);
     }
 
-   
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validator=Validator::make($request->all(),[
@@ -47,7 +45,7 @@ class ServiceController extends Controller
 
         $model->slug = Str::slug($request->slug);
         $model->content = $request-> content;
-        $model->status = $request-> status; 
+        $model->status = $request-> status ?? 1 ; 
        $model->save();
 
        return response()->json([
@@ -59,7 +57,7 @@ class ServiceController extends Controller
     
     public function show(Service $service)
     {
-        //
+    
     }
 
     

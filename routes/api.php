@@ -20,5 +20,6 @@ Route::get('logout',[AunthenticationController::class,'logout']);
 
 // Service routes
 Route::post('services',[ServiceController::class,'store']);
+Route::get('services',[ServiceController::class,'index']);
 
 });
