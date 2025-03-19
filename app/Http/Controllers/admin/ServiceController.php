@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\ServiceImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ServiceController extends Controller
 {
@@ -39,6 +42,7 @@ class ServiceController extends Controller
             ]);
         }
 
+        
         // service with no error
         $model=new Service();
         $model->title = $request-> title;
@@ -48,6 +52,42 @@ class ServiceController extends Controller
         $model->content = $request-> content;
         $model->status = $request-> status ?? 1 ; 
        $model->save();
+
+    
+       if($request->imageId>0){
+        $serviceImage=ServiceImage::find($request->imageId);
+        if($serviceImage !=null){
+
+            $extArray= explode('.',$serviceImage->name);
+            $ext=last($extArray);
+
+            $fileName=strtotime('now').$model->id.'.'.$ext;
+
+            
+            //   create small thumbnail here
+            $manager = new ImageManager(Driver::class);
+            $sourcepath=public_path('uploads/servicetemp/'.$serviceImage->name);
+
+            $destpath=public_path('uploads/services/small/'.$fileName);
+            $image = $manager->read($sourcepath);
+            $image->coverDown(375,400);
+            $image->coverDown(500,600);
+            $image->save($destpath);
+
+              //   create large thumbnail here
+         
+              $destpath=public_path('uploads/services/large/'.$fileName);
+              $image = $manager->read($sourcepath);
+              $image->scaleDown(1200);
+              $image->save($destpath);
+
+              $model-> image=$fileName;
+              $model->save();
+
+            
+        }
+    }
+
 
        return response()->json([
         'status'=>true,
@@ -104,6 +144,9 @@ class ServiceController extends Controller
             ]);
         }
 
+          // Store old image before updating
+        $oldImage = $service->image;
+
         // service with no error
         // $service=new Service();
         $service->title = $request-> title;
@@ -124,6 +167,34 @@ class ServiceController extends Controller
                 $ext=last($extArray);
 
                 $fileName=strtotime('now').$service->id.'.'.$ext;
+
+                
+                //   create small thumbnail here
+                $manager = new ImageManager(Driver::class);
+                $sourcepath=public_path('uploads/servicetemp/'.$serviceImage->name);
+
+                $destpath=public_path('uploads/services/small/'.$fileName);
+                $image = $manager->read($sourcepath);
+                $image->coverDown(375,400);
+                $image->coverDown(500,600);
+                $image->save($destpath);
+
+                  //   create large thumbnail here
+             
+                  $destpath=public_path('uploads/services/large/'.$fileName);
+                  $image = $manager->read($sourcepath);
+                  $image->scaleDown(1200);
+                  $image->save($destpath);
+
+                  $service-> image=$fileName;
+                  $service->save();
+
+                  if($oldImage != ''){
+                    File::delete(public_path('uploads/services/large/'.$oldImage)); 
+                    File::delete(public_path('uploads/services/small/'.$oldImage)); 
+
+                  }
+                  
                 
             }
         }
