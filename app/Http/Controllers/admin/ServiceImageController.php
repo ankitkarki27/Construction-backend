@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-// use Intervention\Image\Drivers\Imagick\Driver;
+
 
 class ServiceImageController extends Controller
 {
@@ -48,7 +48,6 @@ class ServiceImageController extends Controller
         // read image from file system
   
     $image = $manager->read($sourcepath);
-    // $img->cover(600, 360);
     $image->coverDown(300,300);
     $image->save($destpath);
  

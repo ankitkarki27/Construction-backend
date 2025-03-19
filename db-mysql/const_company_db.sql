@@ -2,7 +2,7 @@ use const_company;
 
 select * from services;
 
-DELETE FROM services WHERE id IN (4, 5, 6);
+DELETE FROM services WHERE id IN (7,12);
 
 
 -- safe mode using]\\ change 0 to 1 after  --  
