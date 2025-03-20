@@ -27,7 +27,7 @@ class ServiceImageController extends Controller
   $image= $request->image;
 
   $ext =$image->getClientOriginalExtension();
-  $imageName = strtotime('now') . '.' . $ext; // e.g., 1742388877.jpg
+  $imageName = strtotime('now') . '.' . $ext;  // e.g., 1742388877.jpg
 
   //save data in service images table
   $model = new ServiceImage();

@@ -4,7 +4,7 @@ select * from services;
 select * from service_images;
 
 
--- DELETE FROM services WHERE id IN (7,12);
+-- DELETE FROM services WHERE id IN (20,49);
 
 
 -- safe mode using]\\ change 0 to 1 after  --  
