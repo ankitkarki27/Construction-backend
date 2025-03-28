@@ -14,7 +14,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class ServiceController extends Controller
 {
-    // Fetch all services, ordered by latest creation date
+    // To Fetch all services
     public function index()
     {
         $services = Service::orderBy('created_at', 'DESC')->get();
@@ -24,71 +24,8 @@ class ServiceController extends Controller
         ]);
     }
 
-    // Store a new service in the database
-    // public function store(Request $request)
-    // {
-    //     // Validate request inputs
-    //     $validator = Validator::make($request->all(), [
-    //         'title' => 'required',
-    //         'slug' => 'required|unique:services,slug',
-    //     ]);
-
-    //     // Return errors if validation fails
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'errors' => $validator->errors()
-    //         ]);
-    //     }
-
-    //     // Create new service instance
-    //     $model = new Service();
-    //     $model->title = $request->title;
-    //     $model->short_desc = $request->short_desc;
-    //     $model->slug = Str::slug($request->slug);
-    //     $model->content = $request->content;
-    //     $model->status = $request->status ?? 1;
-    //     $model->save();
-
-    //     // Handle service image if provided
-    //     if ($request->imageId > 0) {
-    //         $serviceImage = ServiceImage::find($request->imageId);
-    //         if ($serviceImage) {
-    //             $extArray = explode('.', $serviceImage->name);
-    //             $ext = last($extArray);
-    //             $fileName = strtotime('now') . $model->id . '.' . $ext;
-
-    //             $manager = new ImageManager(Driver::class);
-    //             $sourcePath = public_path('uploads/servicetemp/' . $serviceImage->name);
-
-    //             // Generate small thumbnail
-    //             $destPath = public_path('uploads/services/small/' . $fileName);
-    //             $image = $manager->read($sourcePath);
-    //             $image->coverDown(375, 400);
-    //             $image->coverDown(500, 600);
-    //             $image->save($destPath);
-
-    //             // Generate large thumbnail
-    //             $destPath = public_path('uploads/services/large/' . $fileName);
-    //             $image = $manager->read($sourcePath);
-    //             $image->scaleDown(1200);
-    //             $image->save($destPath);
-
-    //             // Save image name in service model
-    //             $model->image = $fileName;
-    //             $model->save();
-    //         }
-    //     }
-
-    //     return response()->json([
-    //         'status' => true,
-    //         'message' => 'Your Service added successfully'
-    //     ]);
-    // }
-
     public function store(Request $request)
-{
-    // Validate request inputs
+    {
     $validator = Validator::make($request->all(), [
         'title' => 'required',
         'slug' => 'required|unique:services,slug',
@@ -142,7 +79,7 @@ class ServiceController extends Controller
 
     return response()->json([
         'status' => true,
-        'message' => 'Your Service added successfully'
+        'message' => 'Your Service is added successfully'
     ]);
 }
 
