@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('authenticate',[AunthenticationController::class,'authenticate']);
 
-Route::get('get-services',[FrontServiceController::class,'index']);
+Route::get('services',[FrontServiceController::class,'index']);
 Route::get('latest-services',[FrontServiceController::class,'newservices']);
 
 
