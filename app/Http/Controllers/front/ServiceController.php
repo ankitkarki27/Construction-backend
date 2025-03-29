@@ -10,12 +10,26 @@ class ServiceController extends Controller
 {
     public function index(){
         //this method will return all active services 
-        $services=Service::where('status',1)->orderBy('created_at','DESC')->get();
+        $services=Service::where('status',1)
+        ->orderBy('created_at','DESC')
+        ->get();
         return response()->json([
             'status' => true,
             'data' => $services
         ]);
-        // return  $services;
+       
+    }
+
+    public function allservices(){
+        //this method will return all active services 
+        $services=Service::where('status',1)
+        ->orderBy('created_at','DESC')
+        ->get();
+        return response()->json([
+            'status' => true,
+            'data' => $services
+        ]);
+       
     }
 
     public function newservices(Request $request){
