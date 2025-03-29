@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\ServiceImageController;
 use App\Http\Controllers\AunthenticationController;
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
+
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,14 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('services/{id}', [ServiceController::class, 'show']);  
     Route::delete('services/{id}', [ServiceController::class, 'destroy']); 
 
+
     // Service Image Management (Admin Only)
     Route::post('service-images', [ServiceImageController::class, 'store']);  
+
+    // For Projects
+    Route::post('projects', [ProjectController::class, 'store']);  
+    Route::get('projects', [ProjectController::class, 'index']); 
+    Route::get('projects/{id}', [ProjectController::class, 'show']);  
+    Route::put('projects/{id}', [ProjectController::class, 'update']);  
+    Route::delete('projects/{id}', [ProjectController::class, 'destroy']); 
 });

@@ -1,6 +1,6 @@
 use const_company;
 
-select * from services;
+select * from projects;
 select * from service_images;
 
 
