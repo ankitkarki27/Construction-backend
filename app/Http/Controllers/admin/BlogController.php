@@ -194,7 +194,17 @@ class BlogController extends Controller
                 File::delete(public_path('uploads/blogs/small/' . $oldImage));
             }
         }
-    }}
+    }
+     // Save updated project
+     $blog->save();
+        
+        //Ensure a final JSON response is returned
+        return response()->json([
+            'status' => true,
+            'message' => 'Blog updated successfully',
+            'blog' => $blog
+        ]);
+        }
     
     public function destroy($id){
         {
