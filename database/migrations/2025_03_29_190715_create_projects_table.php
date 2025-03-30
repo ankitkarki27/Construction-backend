@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique(); 
             $table->string('short_desc')->nullable(); 
             $table->text('content')->nullable(); 
-            // $table->enum('construction_type', ['residential', 'commercial', 'industrial', 'infrastructure', 'renovation','educational', 'transportation', 'others'])->nullable();   
-            // $table->enum('sector', ['private', 'public', 'governmental'])->nullable();  
+            $table->enum('construction_type', ['residential', 'commercial', 'industrial', 'infrastructure', 'renovation','educational', 'transportation', 'others'])->nullable();   
+            $table->enum('sector', ['private', 'public', 'governmental'])->nullable();  
             $table->string('location')->nullable(); 
             $table->string('image')->nullable();
             $table->integer('status')->default(1);
