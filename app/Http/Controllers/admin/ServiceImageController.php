@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-
+// controller that controlls ,stores service temp images.images overall of the site
 class ServiceImageController extends Controller
 {
   public function store(Request $request){

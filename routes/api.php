@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\ServiceImageController;
+use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\AunthenticationController;
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
 
@@ -47,4 +48,11 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('blogs/{id}', [BlogController::class, 'show']);  
     Route::put('blogs/{id}', [BlogController::class, 'update']);  
     Route::delete('blogs/{id}', [BlogController::class, 'destroy']); 
+
+    // For testimonials(admin only)
+    Route::post('testimonials', [TestimonialController::class, 'store']);  
+    Route::get('testimonials', [TestimonialController::class, 'index']); 
+    Route::get('testimonials/{id}', [TestimonialController::class, 'show']);  
+    Route::put('testimonials/{id}', [TestimonialController::class, 'update']);  
+    Route::delete('testimonials/{id}', [TestimonialController::class, 'destroy']); 
 });
