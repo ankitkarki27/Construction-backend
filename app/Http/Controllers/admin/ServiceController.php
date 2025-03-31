@@ -147,8 +147,8 @@ class ServiceController extends Controller
             if ($serviceImage) {
                 $extArray = explode('.', $serviceImage->name);
                 $ext = last($extArray);
-                $fileName = strtotime('now') . $service->id . '.' . $ext;
-
+                $fileName = strtotime('now') . $service->id . '.' . $ext; 
+ 
                 $manager = new ImageManager(Driver::class);
                 $sourcePath = public_path('uploads/servicetemp/' . $serviceImage->name);
 

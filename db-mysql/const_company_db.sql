@@ -1,6 +1,7 @@
 use const_company;
 
 select * from blogs;
+select * from testimonials;
 select * from service_images;
 
 
