@@ -123,16 +123,16 @@ class TestimonialController extends Controller
 
         // Validate Input data
         $validator=Validator::make($request->all(),[
-           
             'name' => 'nullable|string|max:500',
             'designation' => 'nullable|string|max:500',
             'company' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|integer|in:0,1',
             'phone' => 'nullable|string|max:10',
+            'testimonial' => 'nullable|string|max:5000',
         ]);
 
-        if(!$validator->fails()){
+        if($validator->fails()){
             return response()->json([
                 'status'=>false,
                 'errors'=>$validator->errors()
@@ -149,11 +149,10 @@ class TestimonialController extends Controller
         $testimonial->testimonial = $request->testimonial;
         $testimonial->status = $request->status;
         $testimonial->phone = $request->phone;
-        $testimonial->save();
+        // $testimonial->save();
 
         //handle image update if provided
         if($request->imageId>0){
-
             $serviceImage = ServiceImage::find($request->imageId);
             if ($serviceImage) {
                 $extArray = explode('.', $serviceImage->name);
@@ -181,6 +180,7 @@ class TestimonialController extends Controller
         }
         // saved updated testimonial
         $testimonial->save();
+
         return response()->json([
             'status'=>true,
             'message'=>'Testimonial Updated Successfully',

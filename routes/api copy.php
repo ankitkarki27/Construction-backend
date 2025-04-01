@@ -26,6 +26,7 @@ Route::get('get-services', [FrontServiceController::class, 'index']);
 // Route::get('services/:id', [FrontServiceController::class, 'service']);  
 // Route::get('/services/{identifier}', [FrontServiceController::class, 'service']); // Update here to use 'service' method for both slug and ID
 Route::get('/services/{slug}', [FrontServiceController::class, 'serviceBySlug']);
+Route::get('/services/{slug}', [FrontServiceController::class, 'serviceBySlug']);
 Route::get('latest-services', [FrontServiceController::class, 'newservices']);  
 
 Route::get('get-projects', [FrontProjectController::class, 'index']);  

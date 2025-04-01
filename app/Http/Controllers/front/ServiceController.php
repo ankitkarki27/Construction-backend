@@ -20,16 +20,43 @@ class ServiceController extends Controller
        
     }
 
-    public function allservices(){
-        //this method will return all active services 
-        $services=Service::where('status',1)
-        ->orderBy('created_at','DESC')
-        ->get();
+
+     // This method returns a single service by ID
+     public function service($id){
+        $service = Service::where('status', 1)
+            ->where('id', $id)
+            ->first();
+
+        if (!$service) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Service not found'
+            ], 404);
+        }
         return response()->json([
             'status' => true,
-            'data' => $services
+            'data' => $service
         ]);
-       
+    }
+
+    public function serviceBySlug($slug)
+    {
+    // Fetch the service by slug
+    $service = Service::where('status', 1)
+        ->where('slug', $slug)
+        ->first();
+
+    if (!$service) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Service not found'
+        ], 404);
+    }
+
+    return response()->json([
+        'status' => true,
+        'data' => $service
+    ]);
     }
 
     public function newservices(Request $request){
