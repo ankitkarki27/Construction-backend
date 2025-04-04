@@ -12,6 +12,8 @@ use App\Http\Controllers\AunthenticationController;
 // for front page displaying
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
 use App\Http\Controllers\front\ProjectController as FrontProjectController;
+use App\Http\Controllers\front\BlogController as FrontBlogController;
+use App\Http\Controllers\front\TestimonialController as FrontTestimonialController;
 
 
 use App\Models\Service;
@@ -23,13 +25,21 @@ Route::post('authenticate', [AunthenticationController::class, 'authenticate']);
 
 // service routes to show services in home page(No Auth req: so public route)
 Route::get('get-services', [FrontServiceController::class, 'index']);  
-// Route::get('services/:id', [FrontServiceController::class, 'service']);  
-// Route::get('/services/{identifier}', [FrontServiceController::class, 'service']); // Update here to use 'service' method for both slug and ID
 Route::get('/services/{slug}', [FrontServiceController::class, 'serviceBySlug']);
 Route::get('latest-services', [FrontServiceController::class, 'newservices']);  
 
 Route::get('get-projects', [FrontProjectController::class, 'index']);  
+Route::get('/projects/{slug}', [FrontProjectController::class, 'projectBySlug']);
 Route::get('latest-projects', [FrontProjectController::class, 'newprojects']);  
+
+// BlogController
+Route::get('get-blogs', [FrontBlogController::class, 'index']);  
+Route::get('/blogs/{slug}', [FrontBlogController::class, 'blogBySlug']);
+Route::get('latest-blogs', [FrontBlogController::class, 'newblogs']);  
+
+Route::get('get-testimonials', [FrontTestimonialController::class, 'index']);  
+// Route::get('/testimonials/{slug}', [FrontTestimonialController::class, 'testimonialBySlug']);
+Route::get('latest-testimonials', [FrontTestimonialController::class, 'newtestimonials']);  
 
 // Protected Routes (Only Authenticated Users Can Access)
 Route::group(['middleware' => ['auth:sanctum']], function() {  

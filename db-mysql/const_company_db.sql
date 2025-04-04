@@ -1,11 +1,10 @@
 use const_company;
 
-select * from services;
+select * from projects;
+
 select * from testimonials;
 select * from service_images;
-
-
--- DELETE FROM services WHERE id IN (20,49);
+DELETE FROM services WHERE id IN (62,63,64,65,66);
 DELETE FROM service_images WHERE id BETWEEN 1 AND 83;
 
 

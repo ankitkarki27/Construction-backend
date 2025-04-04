@@ -3,72 +3,75 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class BlogController extends Controller
 {
     public function index(){
-        //this method will return all active services 
-        $projects=Project::where('status',1)
+        //this method will return all active blogs 
+        $blogs=Blog::where('status',1)
         ->orderBy('created_at','DESC')
         ->get();
         return response()->json([
             'status' => true,
-            'data' =>  $projects
+            'data' => $blogs
         ]);
        
     }
 
-      //this method will return all active project 
-      public function project($id){
-        $project = Project::where('status', 1)
+
+     // This method returns a single blog by ID
+     public function blog($id){
+        $blog = Blog::where('status', 1)
             ->where('id', $id)
             ->first();
 
-        if (!$project) {
+        if (!$blog) {
             return response()->json([
                 'status' => false,
-                'message' => 'Project not found'
+                'message' => 'Blog not found'
             ], 404);
         }
         return response()->json([
             'status' => true,
-            'data' => $project
+            'data' => $blog
         ]);
     }
 
-    public function projectBySlug($slug)
+    
+    public function blogBySlug($slug)
     {
-    // Fetch the project by slug
-    $project = Project::where('status', 1)
+    // Fetch the blog by slug
+    $blog = Blog::where('status', 1)
         ->where('slug', $slug)
         ->first();
 
-    if (!$project) {
+    if (!$blog) {
         return response()->json([
             'status' => false,
-            'message' => 'Project not found'
+            'message' => 'Blog not found'
         ], 404);
     }
-    
+
     return response()->json([
         'status' => true,
-        'data' => $project
+        'data' => $blog
     ]);
     }
-    
 
-    public function newprojects(Request $request){
-        //this method will return latest active projects 
-        $projects = Project::where('status', 1)
+    public function newblogs(Request $request){
+        //this method will return latest active blogs 
+        $blogs = Blog::where('status', 1)
         ->orderBy('created_at', 'DESC')
         ->take($request->get('limit'))
         ->get();
 
         return response()->json([
             'status' => true,
-            'data' =>  $projects
+            'data' => $blogs
         ]);
     }
+
+
 }
