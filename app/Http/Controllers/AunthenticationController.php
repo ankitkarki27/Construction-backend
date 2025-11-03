@@ -28,26 +28,25 @@ class AunthenticationController extends Controller
 
                 ];
                 if(Auth::attempt($credentials)){
-                    // Get authenticated user 
+                    
                     $user = User::find(Auth::user()->id);
                   
-                    // get token
-                    // $token = $user->createToken('token');   
+                     
                     $token = $user->createToken('token')->plainTextToken;    
 
-                    // return Auth::user();
+                 
                     return response()->json([
                         'status'=>true,
                         'token'=>$token,
                         'id'=>Auth::user()->id
                     ]); 
-                        // end of access token
+                       
 
                 }else{
                     return response()->json([
                         'status'=>false,
                         'message'=>'Either email or password is incorrect'
-                        //    'message'=>'Either email or password is incorrect'
+                        
                     ]);   
                 }
         }
